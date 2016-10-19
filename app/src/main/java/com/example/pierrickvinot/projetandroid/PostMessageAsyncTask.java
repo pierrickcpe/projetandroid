@@ -2,6 +2,8 @@ package com.example.pierrickvinot.projetandroid;
 
 import android.os.AsyncTask;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.UUID;
 
 /**
  * Created by pierrick.vinot on 19/10/16.
@@ -22,14 +25,16 @@ public class PostMessageAsyncTask extends AsyncTask<String, String, Boolean> {
     private PostMessageListener Listener;
     private String login;
     private String pwd;
+    private String message;
 
     protected Boolean doInBackground(String... credential) {
         int count =credential.length;
 
         login=credential[0];
         pwd=credential[1];
+        message=credential[2];
 
-        String loginURL = "https://training.loicortola.com/chat-rest/2.0/register/";
+        String loginURL = "https://training.loicortola.com/chat-rest/1.0/messages/"+login+"/"+pwd;
 
         StringBuffer chaine = new StringBuffer("");
         try{
@@ -44,8 +49,11 @@ public class PostMessageAsyncTask extends AsyncTask<String, String, Boolean> {
 
             JSONObject json = new JSONObject();
 
+            UUID uuid = UUID.randomUUID();
+
+            json.put("uuid",uuid);
             json.put("login",login);
-            json.put("password", pwd);
+            json.put("message", message);
 
             OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
             wr.write(json.toString());

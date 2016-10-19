@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
                             Toast.makeText(MainActivity.this,"Message sent",Toast.LENGTH_LONG).show();
 
+                            EditText message = (EditText)findViewById(R.id.main_message);
+                            message.setText("");
                         }
                         else{
                             Toast.makeText(MainActivity.this,"Send Failed",Toast.LENGTH_LONG).show();
@@ -60,12 +62,37 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
                 PostMessageThread.setPostMessageListener(PostMessageListener);
-                PostMessageThread.execute(login,pwd);
 
+                EditText message = (EditText)findViewById(R.id.main_message);
+                String messageValue = message.getText().toString();
+
+                PostMessageThread.execute(login,pwd,messageValue);
+                refresh();
+
+            }
+        });
+
+        Button buttonRefresh = (Button) findViewById(R.id.main_btn_refresh);
+        buttonRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
 
             }
         });
     }
-
+    private void refresh(){
+        List<Message> messages = new ArrayList<>();
+        GetListAsyncTask GetListThread = new GetListAsyncTask();
+        GetListAsyncTask.GetListListener GetListListener = new GetListAsyncTask.GetListListener(){
+            @Override public void onGetList(List<Message> result) {
+                ListView listView = (ListView) findViewById(R.id.listView);
+                ItemAdapter adapter = new ItemAdapter(result, MainActivity.this);
+                listView.setAdapter(adapter);
+            }
+        };
+        GetListThread.setLoginListener(GetListListener);
+        GetListThread.execute(login,pwd);
+    }
 
 }
