@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.pierrickvinot.projetandroid.R;
 import com.example.pierrickvinot.projetandroid.tasks.SignupAsyncTask;
-
+//vofog
 public class SignupActivity extends AppCompatActivity {
 
     @Override
