@@ -1,4 +1,6 @@
-package com.example.pierrickvinot.projetandroid;
+package com.example.pierrickvinot.projetandroid.models;
+
+import java.util.List;
 
 /**
  * Created by pierrick.vinot on 19/10/16.
@@ -8,13 +10,16 @@ public class Message {
     private String message;
     private String login;
     private String uuid;
+    private List<String> images;
+    private List<Attachment> attachments;
 
 
 
-    public Message(String message, String user, String uuid) {
+    public Message(String message, String user, String uuid, List<String> image) {
         this.message = message;
         this.login = user;
         this.uuid = uuid;
+        this.images = image;
     }
     public Message(){}
 
@@ -40,4 +45,24 @@ public class Message {
     public void setLogin(String login) {
         this.login = login;
     }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    public String getImage() {
+        if(images!=null) {
+            return images.get(0);
+        }
+        return null;
+    }
+
+    public void setImage(List<String> image) {
+        this.images = image;
+    }
+
 }

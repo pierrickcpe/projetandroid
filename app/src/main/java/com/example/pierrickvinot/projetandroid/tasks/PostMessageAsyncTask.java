@@ -1,51 +1,40 @@
-package com.example.pierrickvinot.projetandroid;
+package com.example.pierrickvinot.projetandroid.tasks;
 
 import android.os.AsyncTask;
-import android.util.Pair;
 
+import com.google.gson.Gson;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 /**
- * Created by pierrick.vinot on 12/10/16.
+ * Created by pierrick.vinot on 19/10/16.
  */
 
-
-public class SignupAsyncTask extends AsyncTask<String, String, Boolean> {
-    public interface SignupListener{
-        public void onSignup(boolean result,String login , String pwd);
+public class PostMessageAsyncTask extends AsyncTask<String, String, Boolean> {
+    public interface PostMessageListener{
+        public void onPostMessage(boolean result);
     };
 
-    private SignupListener Listener;
+    private PostMessageListener Listener;
     private String login;
     private String pwd;
+    private String message;
 
     protected Boolean doInBackground(String... credential) {
         int count =credential.length;
 
         login=credential[0];
         pwd=credential[1];
+        message=credential[2];
 
-        String loginURL = "https://training.loicortola.com/chat-rest/2.0/register/";
+        String loginURL = "https://training.loicortola.com/chat-rest/1.0/messages/"+login+"/"+pwd;
 
         StringBuffer chaine = new StringBuffer("");
         try{
@@ -60,8 +49,11 @@ public class SignupAsyncTask extends AsyncTask<String, String, Boolean> {
 
             JSONObject json = new JSONObject();
 
+            UUID uuid = UUID.randomUUID();
+
+            json.put("uuid",uuid);
             json.put("login",login);
-            json.put("password", pwd);
+            json.put("message", message);
 
             OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
             wr.write(json.toString());
@@ -88,12 +80,12 @@ public class SignupAsyncTask extends AsyncTask<String, String, Boolean> {
 
     protected void onPostExecute(Boolean result) {
         if(result)
-            Listener.onSignup(true,login,pwd);
+            Listener.onPostMessage(true);
         else
-            Listener.onSignup(false,login,pwd);
+            Listener.onPostMessage(false);
     }
 
-    public void setSignupListener(SignupListener LL){
+    public void setPostMessageListener(PostMessageListener LL){
         Listener = LL;
     }
 }

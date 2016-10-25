@@ -1,11 +1,21 @@
-package com.example.pierrickvinot.projetandroid;
+package com.example.pierrickvinot.projetandroid.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.Headers;
+import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.target.Target;
+import com.example.pierrickvinot.projetandroid.R;
+import com.example.pierrickvinot.projetandroid.models.Message;
 
 import java.util.List;
 
@@ -44,6 +54,24 @@ public class ItemAdapter extends BaseAdapter {
         message.setText(messages.get(position).getMessage());
         TextView author = (TextView) convertView.findViewById(R.id.author);
         author.setText(messages.get(position).getLogin());
+        if(messages.get(position).getImage()!=null) {
+
+            ImageView image = (ImageView) convertView.findViewById(R.id.image);
+
+            Headers HEADERS = new LazyHeaders.Builder().addHeader("t", "t").build();
+            GlideUrl glideUrl = new GlideUrl(messages.get(position).getImage(),HEADERS);
+
+            Target<Bitmap> theBitmap = Glide.
+                    with(context).
+                    load(glideUrl).
+                    asBitmap().
+                    into(image);
+
+            boolean test=true;
+            if(test)
+                return convertView;
+        }
         return convertView;
     }
+
 }

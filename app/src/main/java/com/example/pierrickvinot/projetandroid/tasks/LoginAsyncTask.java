@@ -1,6 +1,7 @@
-package com.example.pierrickvinot.projetandroid;
+package com.example.pierrickvinot.projetandroid.tasks;
 
 import android.os.AsyncTask;
+import android.util.Base64;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,12 +25,14 @@ public class LoginAsyncTask extends AsyncTask<String, String, Boolean> {
         login=credential[0];
         pwd=credential[1];
 
-        String loginURL = "https://training.loicortola.com/chat-rest/1.0/connect/"+login+"/"+pwd;
+        String loginURL = "https://training.loicortola.com/chat-rest/2.0/connect/";
 
         try {
 
             URL url = new URL(loginURL);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            String basicAuth = "Basic "+ Base64.encodeToString((login+":"+pwd).getBytes(),Base64.NO_WRAP);
+            urlConnection.setRequestProperty("Authorization", basicAuth );
             int result = urlConnection.getResponseCode();
             if(result==200)
                 return true;

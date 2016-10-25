@@ -1,4 +1,4 @@
-package com.example.pierrickvinot.projetandroid;
+package com.example.pierrickvinot.projetandroid.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.pierrickvinot.projetandroid.R;
+import com.example.pierrickvinot.projetandroid.tasks.SignupAsyncTask;
 
 public class SignupActivity extends AppCompatActivity {
 
