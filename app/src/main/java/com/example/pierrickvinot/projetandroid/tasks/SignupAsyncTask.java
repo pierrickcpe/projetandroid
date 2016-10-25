@@ -69,11 +69,8 @@ public class SignupAsyncTask extends AsyncTask<String, String, Boolean> {
 
             StringBuilder sb = new StringBuilder();
             int HttpResult = con.getResponseCode();
-            if (HttpResult == HttpURLConnection.HTTP_OK) {
-                return true;
-            } else {
-                return false;
-            }
+
+            return (HttpResult == HttpURLConnection.HTTP_OK);
 
         } catch (IOException e) {
             // writing exception to log

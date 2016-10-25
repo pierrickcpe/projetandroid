@@ -29,11 +29,15 @@ public class ItemAdapter extends BaseAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
+    String login;
+    String pwd;
 
-    public ItemAdapter(List<Message> messages, Context context) {
+    public ItemAdapter(List<Message> messages, Context context, String login, String pwd) {
         super();
         this.messages = messages;
         this.context = context;
+        this.login = login;
+        this.pwd = pwd;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -59,7 +63,7 @@ public class ItemAdapter extends BaseAdapter {
 
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
 
-            String basicAuth = "Basic "+ Base64.encodeToString(("t:t").getBytes(),Base64.NO_WRAP);
+            String basicAuth = "Basic "+ Base64.encodeToString((login+":"+pwd).getBytes(),Base64.NO_WRAP);
 
             Headers HEADERS = new LazyHeaders.Builder().addHeader("Authorization", basicAuth).build();
             GlideUrl glideUrl = new GlideUrl(messages.get(position).getImage(), HEADERS);
