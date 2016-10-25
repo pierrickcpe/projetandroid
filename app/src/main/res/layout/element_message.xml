@@ -34,8 +34,6 @@
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/messageSent"
-            android:layout_marginLeft="10sp"
-            android:padding="5sp"/>
+            />
     </LinearLayout>
 </RelativeLayout>

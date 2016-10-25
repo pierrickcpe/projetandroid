@@ -2,6 +2,7 @@ package com.example.pierrickvinot.projetandroid.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +59,15 @@ public class ItemAdapter extends BaseAdapter {
 
             ImageView image = (ImageView) convertView.findViewById(R.id.image);
 
-            Headers HEADERS = new LazyHeaders.Builder().addHeader("t", "t").build();
-            GlideUrl glideUrl = new GlideUrl(messages.get(position).getImage(),HEADERS);
+            String basicAuth = "Basic "+ Base64.encodeToString(("t:t").getBytes(),Base64.NO_WRAP);
 
-            Target<Bitmap> theBitmap = Glide.
+            Headers HEADERS = new LazyHeaders.Builder().addHeader("Authorization", basicAuth).build();
+            GlideUrl glideUrl = new GlideUrl(messages.get(position).getImage(), HEADERS);
+
+            Glide.
                     with(context).
                     load(glideUrl).
-                    asBitmap().
+                    centerCrop().crossFade().
                     into(image);
 
             boolean test=true;
