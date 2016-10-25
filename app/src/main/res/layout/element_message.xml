@@ -10,6 +10,7 @@
         android:id="@+id/author_name">
         <TextView
             android:id="@+id/author"
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="author"/>
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/author_name"
         android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
         android:layout_marginTop="5sp"
         android:id="@+id/text_image_message"
         >
@@ -39,11 +41,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_message"
             android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
             android:background="@color/messageSent">
             <ImageView
                 android:id="@+id/image"
-                android:layout_height="300sp"
-                android:layout_width="300sp" />
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="false" />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

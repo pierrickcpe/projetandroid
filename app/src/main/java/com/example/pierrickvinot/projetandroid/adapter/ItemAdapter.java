@@ -73,10 +73,6 @@ public class ItemAdapter extends BaseAdapter {
                     load(glideUrl).
                     centerCrop().crossFade().
                     into(image);
-
-            boolean test=true;
-            if(test)
-                return convertView;
         }
         return convertView;
     }
