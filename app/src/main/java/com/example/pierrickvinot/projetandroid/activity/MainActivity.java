@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                             message.setText("");
                         } else {
                             Toast.makeText(MainActivity.this, "Send Failed", Toast.LENGTH_LONG).show();
+                            message.setText("");
                         }
                     }
                 };
@@ -121,12 +122,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSendPic(boolean result) {
                         if (result) {
-
                             Toast.makeText(MainActivity.this, "Message sent", Toast.LENGTH_LONG).show();
                             message.setText("");
-
                         } else {
                             Toast.makeText(MainActivity.this, "Send Failed", Toast.LENGTH_LONG).show();
+                            message.setText("");
                         }
                     }
                 };
@@ -207,9 +207,11 @@ public class MainActivity extends AppCompatActivity {
                         if (result) {
 
                             Toast.makeText(MainActivity.this, "Message sent", Toast.LENGTH_LONG).show();
+                            message.setText("");
 
                         } else {
                             Toast.makeText(MainActivity.this, "Send Failed", Toast.LENGTH_LONG).show();
+                            message.setText("");
                         }
                     }
                 };

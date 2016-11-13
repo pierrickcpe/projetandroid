@@ -46,7 +46,9 @@
                 android:background="@android:drawable/edit_text"
                 android:layout_below="@+id/TVlogin"
                 android:layout_marginTop="5dp"
-                android:hint="Enter login"/>
+                android:hint="Enter login"
+                android:inputType="text"
+                android:imeOptions="actionSend"/>
             <TextView
                 android:id="@+id/TVpwd"
                 android:layout_width="match_parent"
@@ -62,7 +64,9 @@
                 android:background="@android:drawable/edit_text"
                 android:layout_below="@+id/TVpwd"
                 android:layout_marginTop="5dp"
-                android:hint="Enter password"/>
+                android:hint="Enter pasword"
+                android:inputType="textPassword"
+                android:imeOptions="actionSend"/>
             <LinearLayout
                 android:id="@+id/buttons"
                 android:layout_width="match_parent"
